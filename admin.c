@@ -18,7 +18,7 @@ int twenty[SIZE]; // array for number of twenty cent coins
 int ten[SIZE]; // array for number of ten cent coins
 int five[SIZE]; // array for number of five cent coins
 int count = 0; // variable for counting the number of customers
-int choice = 1; // initialize it to 1 to enter the loop
+char choice = 1; // initialize it to 1 to enter the loop
 
 // declare functions for menu, input, output, calculation and search
 void menu();
@@ -31,15 +31,15 @@ int search(char f, char l);
 int main()
 {
     // loop until the user enters 0 to exit
-    while (choice != 0)
+    while (choice != '0' || choice == 'n')
     {
         // display the menu and get the user choice
         menu();
         int valid = 0; // flag variable to indicate validity of input
         while (!valid) // loop until valid input is entered
         {
-            scanf("%d", &choice); // use the global variable choice here
-            if (choice >= 0 && choice <= 2) // check if choice is in range
+            scanf("%c", &choice);
+            if (choice == '0' || choice == '1' || choice =='2') // check if choice is in range
             {
                 valid = 1; // set the flag to true if input is valid
             }
@@ -51,13 +51,13 @@ int main()
         }
 
         // if the user enters 1, call the input and output functions
-        if (choice == 1)
+        if (choice == '1')
         {
             input();
             output(count - 1); // use count - 1 as the index because count has been incremented by one in the input function
         }
         // if the user enters 2, call the search function and display the result
-        else if (choice == 2)
+        else if (choice == '2')
         {
             char f, l;
             printf("Enter initials of first name: ");
@@ -76,15 +76,12 @@ int main()
         }
 
         // ask the user if they want to continue or exit
-        printf("Do you want to continue or exit?\n");
-        printf("Press 1 to continue\n");
-        printf("Press 0 to exit\n");
-        printf("Enter your choice: ");
+        printf("Do you wish to continue calculating change? (y/n):");
         valid = 0; // reset the flag variable
         while (!valid) // loop until valid input is entered
         {
-            scanf("%d", &choice); // use the global variable choice here
-            if (choice == 0 || choice == 1) // check if choice is 0 or 1
+            scanf("%c", &choice);
+            if (choice == 'y' || choice == 'n') // check if choice is 0 or 1
             {
                 valid = 1; // set the flag to true if input is valid
             }

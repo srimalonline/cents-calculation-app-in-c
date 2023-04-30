@@ -18,7 +18,7 @@ int twenty[SIZE]; // array for number of twenty cent coins
 int ten[SIZE]; // array for number of ten cent coins
 int five[SIZE]; // array for number of five cent coins
 int count = 0; // variable for counting the number of customers
-char choice = 1; // initialize it to 1 to enter the loop
+char choice = '1'; // initialize it to 1 to enter the loop
 
 // declare functions for menu, input, output, calculation and search
 void menu();
@@ -38,7 +38,7 @@ int main()
         int valid = 0; // flag variable to indicate validity of input
         while (!valid) // loop until valid input is entered
         {
-            scanf("%c", &choice);
+            scanf(" %c", &choice);
             if (choice == '0' || choice == '1' || choice =='2') // check if choice is in range
             {
                 valid = 1; // set the flag to true if input is valid
@@ -46,6 +46,7 @@ int main()
             else
             {
                 printf("Invalid choice. Please try again.\n");
+                printf("Enter your choice:");
                 while (getchar() != '\n'); // clear the input buffer
             }
         }
@@ -77,20 +78,37 @@ int main()
 
         // ask the user if they want to continue or exit
         printf("Do you wish to continue calculating change? (y/n):");
-        valid = 0; // reset the flag variable
-        while (!valid) // loop until valid input is entered
+        scanf(" %c", &choice); // use a space before %c to skip whitespace characters
+        // scanf("%c", &choice);
+        if(choice == 'y')
         {
-            scanf("%c", &choice);
-            if (choice == 'y' || choice == 'n') // check if choice is 0 or 1
-            {
-                valid = 1; // set the flag to true if input is valid
-            }
-            else
-            {
-                printf("Invalid choice. Please try again.\n");
-                while (getchar() != '\n'); // clear the input buffer
-            }
+            choice = '1';
+            continue;
         }
+        else if(choice == 'n')
+        {   
+            break;
+        }
+
+
+        // valid = 0; // reset the flag variable
+        // while (!valid) // loop until valid input is entered
+        // {
+        //     scanf("%c", &choice);
+        //     if (choice == 'y' || choice == 'n') // check if choice is 0 or 1
+        //     {
+        //         valid = 1; // set the flag to true if input is valid
+        //         if(choice == 'y') // continue loop if your enter 'y
+        //         {
+        //             continue;
+        //         }
+        //     }
+        //     else
+        //     {
+        //         // printf("Invalid choice. Please try again.\n");
+        //         while (getchar() != '\n'); // clear the input buffer
+        //     }
+        // }
     }
 
     // exit the program with a message
@@ -101,7 +119,7 @@ int main()
 // menu function to display the options and prompt the user to enter a choice
 void menu()
 {
-    printf("Welcome to admin.c. Please choose an option:\n");
+    printf("\nWelcome to admin.c. Please choose an option:\n");
     printf("Press 1 to enter customer's data\n");
     printf("Press 2 to search for customer's record\n");
     printf("Press 0 to exit\n");

@@ -1,4 +1,3 @@
-// include the header files for input/output and string functions
 #include <stdio.h>
 #include <string.h>
 
@@ -31,7 +30,7 @@ int search(char f, char l);
 int main()
 {
     // loop until the user enters 0 to exit
-    while (choice != '0' || choice == 'n')
+    while (choice != 'n')
     {
         // display the menu and get the user choice
         menu();
@@ -39,7 +38,7 @@ int main()
         while (!valid) // loop until valid input is entered
         {
             scanf(" %c", &choice);
-            if (choice == '0' || choice == '1' || choice =='2') // check if choice is in range
+            if (choice == '1' || choice =='2') // check if choice is in range
             {
                 valid = 1; // set the flag to true if input is valid
             }
@@ -76,66 +75,49 @@ int main()
             }
         }
 
-        // ask the user if they want to continue or exit
+        // ask the user if they want to continue
         printf("Do you wish to continue calculating change? (y/n):");
-        scanf(" %c", &choice); // use a space before %c to skip whitespace characters
-        // scanf("%c", &choice);
-        if(choice == 'y')
+        valid = 0; // reset the flag variable
+        while (!valid) // loop until valid input is entered
         {
-            choice = '1';
-            continue;
+            scanf(" %c", &choice);
+            if (choice == 'y' || choice == 'n') // check if choice is 0 or 1
+            {
+                valid = 1; // set the flag to true if input is valid
+                if(choice == 'y') // continue loop if your enter 'y'
+                {
+                    continue;
+                }
+                else if(choice == 'n') // break loop if you enter 'n'
+                {
+                    break;
+                }
+            }
+            else
+            {
+                printf("Invalid choice. Please try again.\n");
+                printf("Do you wish to continue calculating change? (y/n):");
+                while (getchar() != '\n'); // clear the input buffer
+            }
         }
-        else if(choice == 'n')
-        {   
-            break;
-        }
-
-
-        // valid = 0; // reset the flag variable
-        // while (!valid) // loop until valid input is entered
-        // {
-        //     scanf("%c", &choice);
-        //     if (choice == 'y' || choice == 'n') // check if choice is 0 or 1
-        //     {
-        //         valid = 1; // set the flag to true if input is valid
-        //         if(choice == 'y') // continue loop if your enter 'y
-        //         {
-        //             continue;
-        //         }
-        //     }
-        //     else
-        //     {
-        //         // printf("Invalid choice. Please try again.\n");
-        //         while (getchar() != '\n'); // clear the input buffer
-        //     }
-        // }
     }
 
     // exit the program with a message
-    printf("Thank you for using admin.c. Goodbye.\n");
+    printf("Thank you !\n");
     return 0;
 }
 
 // menu function to display the options and prompt the user to enter a choice
 void menu()
 {
-    printf("\nWelcome to admin.c. Please choose an option:\n");
-    printf("Press 1 to enter customer's data\n");
+    printf("\nPress 1 to enter customer's data\n");
     printf("Press 2 to search for customer's record\n");
-    printf("Press 0 to exit\n");
     printf("Enter your choice: ");
 }
 
 // input function to get the customer's data and store it in arrays
 void input()
 {
-    // check if the array size is exceeded
-    if (count == SIZE)
-    {
-        printf("Sorry, no more space to store data.\n");
-        return;
-    }
-    // get the first name initial and store it in the first array at the current index
     printf("Enter initials of first name: ");
     scanf(" %c", &first[count]); // use a space before %c to skip whitespace characters
 
@@ -154,8 +136,10 @@ void input()
             valid = 1; // set the flag to true if input is valid
         }
         else
-        {
+        {   
             printf("Invalid input. Please enter a number between 5 and 95 that is a multiple of 5.\n");
+            while (getchar() != '\n'); // clear the input buffer
+            continue;
         }
     }
 
